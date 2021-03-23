@@ -6,7 +6,7 @@ def arithmetic(first_num, second_num, operator):
     elif operator == '*':
         result = first_num * second_num
     elif operator == '/':
-        result = first_num + second_num
+        result = first_num / second_num
     else:
         result = 'Unknown operator'
 
@@ -18,7 +18,8 @@ def arithmetic_dict(first_num, second_num, operator):
         operator == '+': first_num + second_num,
         operator == '-': first_num - second_num,
         operator == '*': first_num * second_num,
-        operator == '/': first_num + second_num,
+        operator == '/': first_num / second_num,
+        operator not in ('+', '-', '*', '/'): 'Unknown operator'
     }[True]
 
 
@@ -30,4 +31,7 @@ def arithmetic_lambda(first_num, second_num, operator):
         '/': lambda a, b: a / b,
     }
 
-    return operations[operator](first_num, second_num)
+    try:
+        return operations[operator](first_num, second_num)
+    except (KeyError, AttributeError) as error:
+        return 'Unknown operator'
